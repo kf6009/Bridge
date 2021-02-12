@@ -1,0 +1,58 @@
+\batchmode
+%% Dr Alun Moon
+%% assignment-template.tex, generated from assignment-template.dtx
+\documentclass[12pt]{article}
+\usepackage[british]{babel}
+
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage{infoboxes}
+
+\usepackage{latexsym}
+\usepackage{tlatex}
+\usepackage{color}
+\definecolor{boxshade}{gray}{.8}
+\setboolean{shading}{true}
+
+\usepackage{enumerate,
+            siunitx}
+
+\setlength{\textwidth}{390.0pt}
+\begin{document}
+\makeatletter
+\chardef\%=`\%
+\fl{}\moduleLeftDash\cl{ {\MODULE} bridge}\moduleRightDash\cl{}
+\fl{ {\EXTENDS} Naturals ,\, Sequences}
+\fl{ {\CONSTANT} Cars ,\, Capacity}
+\fl{}
+\fl{ {\VARIABLE} bridge}
+\fl{}
+ \fl{ Init}\al{6}{1}{ \.{\defeq}}\al{6}{2}{ bridge}\al{6}{3}{ \.{=} {\langle}
+ {\rangle}}
+\fl{}
+ \fl{ Type}\al{8}{1}{ \.{\defeq}}\al{8}{2}{ bridge}\al{8}{3}{ \.{\in} Seq (
+ Cars )}
+\fl{}
+\fl{ Safe}\al{10}{1}{ \.{\defeq} Len ( bridge ) \.{\leq} Capacity}
+\fl{}\midbar\cl{}
+\fl{}
+ \fl{ IsOnBridge ( a ) \.{\defeq} \E\, n \.{\in} {\DOMAIN} bridge \.{:} bridge
+ [ n ] \.{=} a}
+\fl{}
+\fl{ enter}\al{15}{1}{ ( c ) \.{\defeq}}
+\fl{ \.{\land}}\al{16}{1}{ c \.{\in} Cars}
+\fl{ \.{\land}}\al{17}{1}{ {\lnot} IsOnBridge ( c )}
+\fl{ \.{\land}}\al{18}{1}{ Len ( bridge ) \.{<} Capacity}
+\fl{ \.{\land}}\al{19}{1}{ bridge \.{'} \.{=} Append ( bridge ,\, c )}
+\fl{ exit \.{\defeq}}
+\fl{ \.{\land}}\al{21}{1}{ Len ( bridge ) \.{>} 0}
+\fl{ \.{\land}}\al{22}{1}{ bridge \.{'} \.{=} Tail ( bridge )}
+\fl{}\midbar\cl{}
+\fl{ Next \.{\defeq}}
+\fl{ \.{\lor}}\al{25}{1}{ \E\, c \.{\in} Cars \.{:} enter ( c )}
+\fl{ \.{\lor}}\al{26}{1}{ exit}
+\fl{}\bottombar\cl{}
+\fl{}
+\fl{}
+\fl{}
+\end{document}

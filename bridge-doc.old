@@ -1,0 +1,118 @@
+%% Dr Alun Moon
+%% assignment-template.tex, generated from assignment-template.dtx
+\documentclass[12pt]{article}
+\usepackage[british]{babel}
+
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage{infoboxes}
+
+\usepackage{latexsym}
+\usepackage{tlatex}
+\usepackage{color}
+\definecolor{boxshade}{gray}{.8}
+\setboolean{shading}{true}
+
+\usepackage{enumerate,
+            siunitx}
+
+\begin{document}
+
+\section{{Specification}}
+\subsection{The Specification} 
+\begin{tla}
+------------------------------- MODULE bridge -------------------------------
+EXTENDS Naturals, Sequences 
+CONSTANT Cars, Capacity
+
+VARIABLE bridge
+
+Init == bridge = <<>>
+
+Type == bridge \in Seq(Cars)
+
+Safe == Len(bridge) \leq Capacity
+--------
+(* Test to see if a value is in a sequence *)
+IsOnBridge(a) == \E n \in DOMAIN bridge : bridge[n] = a 
+
+enter(c) == 
+     /\ c \in Cars
+     /\ \lnot IsOnBridge(c)
+     /\ Len(bridge)<Capacity
+     /\ bridge' = Append(bridge, c)
+exit == 
+    /\ Len(bridge) > 0
+    /\ bridge' = Tail(bridge)
+--------
+Next ==
+    \/ \E c \in Cars : enter(c)
+    \/ exit
+=============================================================================
+\* Modification History
+\* Last modified Fri Feb 12 20:31:31 GMT 2021 by alunm
+\* Created Thu Feb 11 10:48:41 GMT 2021 by alunm
+\end{tla}
+
+\section{The Model}
+\subsection{Model Overview}
+\paragraph{The Behaviour specification} is an \emph{Initial predicate and
+next-state relation}
+\subparagraph{Initial predicate} \textit{Init}
+\subparagraph{Next-state relation} \textit{Next}
+
+\paragraph{The Model} values assigned to declared constants
+\subparagraph{The set of cars in the model} $\mathit{Cars} \leftarrow 1..10$
+\subparagraph{The capacity of the bridge} $\mathit{Capacity} \leftarrow 3$
+\subsection{Checks and verifications}
+\paragraph{Invariants} Two invariants are checked
+\subparagraph{The Type Invariant} \textit{Type}
+\subparagraph{The Safety Invariant} \textit{Safe}
+
+\subsection{Results} A summary of the results
+\paragraph{Statistics} a summary of the actions and number of states
+found.
+
+\begin{table}[h]
+\begin{tabular}{lr}
+	States found & \num{1641} \\
+ Distinct states & \num{821} \\ 
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{llrr}
+	\textbf{Action} & Location & States Found & \textbf{Distinct states} \\
+	\hline
+	\textit{Init}   & Line 7 & 1 & 1 \\
+	\textit{enter}   & Line 16 & 820 & 820 \\
+	\textit{exit}   & Line 21 & 820 & 0 \\
+\end{tabular}
+\end{table}
+
+\subsection{Discussion}
+\subsubsection{Model description} 
+\paragraph{The state of the system is } modelled by a sequence of cars on the
+bridge.
+
+\subparagraph{The initial conditions} are that the bridge is empty
+
+\subparagraph{The type invariant} is that the state-variable \emph{bridge} is
+a sequence of cars from the model set.
+
+\subparagraph{The safety invariant} is that the length of the sequence is not
+greater than the bridge capacity.
+
+\paragraph{The Next relation} is that there is some car that can enter the
+bridge, or that a car exits the bridge.
+
+\subparagraph{A car can enter the bridge if } 
+
+\subsubsection{Interpretation of results}
+
+
+\end{document}
+
+\endinput
+%%
+%% End of file `assignment-template.tex'.
